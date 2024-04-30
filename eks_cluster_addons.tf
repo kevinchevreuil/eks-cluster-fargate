@@ -25,7 +25,7 @@ resource "aws_eks_addon" "kaisen-eks-fargate-addon-ebs-csi-driver" {
   resolve_conflicts_on_update = "OVERWRITE"
   service_account_role_arn    = aws_iam_role.kaisen-eks-fargate-iam-role-oidc.arn
   depends_on = [
-    aws_eks_cluster.kaisen-eks-fargate
+    aws_eks_cluster.kaisen-eks-fargate,
     aws_iam_role.kaisen-eks-fargate-iam-role-oidc
   ]
 }
