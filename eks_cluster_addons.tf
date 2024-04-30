@@ -4,7 +4,7 @@ resource "aws_eks_addon" "kaisen-eks-fargate-addon-vpc-cni" {
   resolve_conflicts_on_create = "OVERWRITE"
   resolve_conflicts_on_update = "OVERWRITE"
   depends_on = [
-    aws_eks_cluster.kaisen-eks-fargate
+    aws_eks_fargate_profile.kaisen-eks-fargate-profile
   ]
 }
 
@@ -14,7 +14,7 @@ resource "aws_eks_addon" "kaisen-eks-fargate-addon-kube-proxy" {
   resolve_conflicts_on_create = "OVERWRITE"
   resolve_conflicts_on_update = "OVERWRITE"
   depends_on = [
-    aws_eks_cluster.kaisen-eks-fargate
+    aws_eks_fargate_profile.kaisen-eks-fargate-profile
   ]
 }
 
@@ -25,28 +25,28 @@ resource "aws_eks_addon" "kaisen-eks-fargate-addon-ebs-csi-driver" {
   resolve_conflicts_on_update = "OVERWRITE"
   service_account_role_arn    = aws_iam_role.kaisen-eks-fargate-iam-role-oidc.arn
   depends_on = [
-    aws_eks_cluster.kaisen-eks-fargate,
+    aws_eks_fargate_profile.kaisen-eks-fargate-profile,
     aws_iam_role.kaisen-eks-fargate-iam-role-oidc
   ]
 }
 
 resource "aws_eks_addon" "kaisen-eks-fargate-addon-snapshot-controller" {
   cluster_name                = aws_eks_cluster.kaisen-eks-fargate.name
-  addon_name                  = "kube-proxy"
+  addon_name                  = "snapshot-controller"
   resolve_conflicts_on_create = "OVERWRITE"
   resolve_conflicts_on_update = "OVERWRITE"
   depends_on = [
-    aws_eks_cluster.kaisen-eks-fargate
+    aws_eks_fargate_profile.kaisen-eks-fargate-profile
   ]
 }
 
 resource "aws_eks_addon" "kaisen-eks-fargate-addon-mountpoint-s3-csi-driver" {
   cluster_name                = aws_eks_cluster.kaisen-eks-fargate.name
-  addon_name                  = "kube-proxy"
+  addon_name                  = "aws-mountpoint-s3-csi-driver"
   resolve_conflicts_on_create = "OVERWRITE"
   resolve_conflicts_on_update = "OVERWRITE"
   depends_on = [
-    aws_eks_cluster.kaisen-eks-fargate
+    aws_eks_fargate_profile.kaisen-eks-fargate-profile
   ]
 }
 
@@ -56,6 +56,6 @@ resource "aws_eks_addon" "kaisen-eks-fargate-addon-pod-identity-agent" {
   resolve_conflicts_on_create = "OVERWRITE"
   resolve_conflicts_on_update = "OVERWRITE"
   depends_on = [
-    aws_eks_cluster.kaisen-eks-fargate
+    aws_eks_fargate_profile.kaisen-eks-fargate-profile
   ]
 }
