@@ -5,7 +5,7 @@ resource "aws_iam_openid_connect_provider" "kaisen-eks-fargate-oidc" {
 }
 
 resource "aws_iam_role" "kaisen-eks-fargate-iam-role-oidc" {
-  name = "Kaisen-EKS-Fargate-OIDC"
+  name               = "Kaisen-EKS-Fargate-OIDC"
   assume_role_policy = data.template_file.kaisen-eks-fargate-iam-role-oidc.rendered
 }
 
@@ -14,6 +14,6 @@ resource "aws_iam_role_policy_attachment" "kaisen-eks-fargate-iam-oidc-attachmen
     "arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy",
   ])
 
-  role = aws_iam_role.kaisen-eks-fargate-iam-role-oidc.name
+  role       = aws_iam_role.kaisen-eks-fargate-iam-role-oidc.name
   policy_arn = each.value
 }
